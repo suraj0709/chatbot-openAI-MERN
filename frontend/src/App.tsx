@@ -5,10 +5,11 @@ import Login from "./pages/Login";
 import Siginup from "./pages/Siginup";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
+import { useAuth } from "./context/AuthContext";
 // import { useAuth } from "./context/AuthContext";
 
 function App() {
-  // console.log(useAuth()?.isLoggedIn);
+  console.log(useAuth()?.isLoggedIn);
   return (
     <main>
       <Header />
