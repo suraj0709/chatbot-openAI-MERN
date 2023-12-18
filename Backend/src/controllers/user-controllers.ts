@@ -97,3 +97,26 @@ export const userLogin = async (
     return res.json({ message: "ERROR", couse: error.message });
   }
 };
+
+export const verifyUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = await User.findById(res.locals.jwtData.id);
+    if (!user)
+      return res.status(401).send("User Dont Register OR Token Malfunctioned");
+
+    if (user._id.toString() !== res.locals.jwtData.id) {
+      return res.status(401).send("Permition Denied");
+    }
+
+    return res
+      .status(201)
+      .json({ message: "OK", name: user.name, email: user.email });
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: "ERROR", couse: error.message });
+  }
+};
